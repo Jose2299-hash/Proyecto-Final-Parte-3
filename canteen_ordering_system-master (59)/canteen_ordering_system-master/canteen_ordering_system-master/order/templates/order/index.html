@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+{% block title %}Order Food From Your College Canteen{% endblock title %}
+{% block maincontent %}
+
+<style>
+    .card-custom {
+        border-radius: 15px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        background: #fdfdfd;
+        border: none;
+    }
+    
+    .card-custom:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card-img-top {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        object-fit: cover;
+    }
+    .card-body h3 {
+       color: #4E342E;
+        font-weight: bold;
+    }
+    .card-body h5 {
+        color: #16a085;
+    }
+    .card-body p {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+        
+    }
+ 
+</style>
+
+<div class="container my-4">
+    <h2 class="text-center mb-4 text-primary">🍽️ Pide comida deliciosa 🍽️</h2>
+    <div class="d-flex flex-wrap justify-content-center">
+        {% for f in food %}
+            <div class="card card-custom m-3 shadow" style="width: 19rem;">
+                <img src="{{f.image.url}}" class="card-img-top" style="height:220px;" alt="Image not found">
+                <div class="card-body">
+                    <h3 class="card-title">{{ f.name | title }}</h3>
+                    <h5 class="card-title">💲 {{ f.price }}</h5>
+                    <p class="card-text"><strong>Description:</strong> {{ f.description | title }}</p>
+
+                    {% for item in cartitems %}
+                        {% if f.name == item.0 and item.1 != '0' %}
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                {% if item.1 == 1 %}
+                                    <a class="btn btn-danger" href="{% url 'update-cart' f.id %}?name=delete_cart_item">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-warning" href="{% url 'update-cart' f.id %}?name=decrease_cart">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </a>
+                                {% endif %}
+                                <span class="mx-2 h5 mb-0">{{ item.1 }}</span>
+                                <a class="btn btn-primary" href="{% url 'update-cart' f.id %}?name=increase_cart">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                                <a class="btn btn-outline-danger ms-auto" href="{% url 'update-cart' f.id %}?name=delete_cart_item">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if f.name == item.0 and item.1 == '0' %}
+                            <a href="{% url 'update-cart' f.id %}" class="btn btn-success mt-3 w-100">
+                                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if request.user.is_anonymous %}
+                        <a href="{% url 'update-cart' f.id %}" class="btn btn-success mt-3 w-100">
+                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock maincontent %}

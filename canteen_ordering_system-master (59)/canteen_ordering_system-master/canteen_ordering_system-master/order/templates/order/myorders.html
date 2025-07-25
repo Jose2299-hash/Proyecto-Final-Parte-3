@@ -1,0 +1,219 @@
+{% extends 'base/base.html' %}
+{% block title %}My Orders{% endblock title %}
+
+{% block maincontent %}
+<style>
+  :root {
+    --fondo: #FFF8F0;
+    --texto: #4E342E;
+    --boton: #FF7043;
+    --acento: #81C784;
+    --encabezado: #D84315;
+    --durazno: #ffe0d1;
+    --rosa-claro: #fff0f5;
+  }
+
+  body {
+    background: linear-gradient(to right, var(--rosa-claro), var(--durazno));
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--texto);
+  }
+
+  table {
+    background-color: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+  }
+
+  thead th {
+    background-color: #f8c291;
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  td, th {
+    padding: 0.75rem;
+    vertical-align: middle;
+  }
+
+  .btn-outline-primary {
+    border-color: var(--boton);
+    color: var(--boton);
+    transition: 0.3s ease;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--boton);
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: #a29bfe;
+    border-color: #a29bfe;
+  }
+
+  .btn-secondary:hover {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+  }
+
+  .progress {
+    height: 1.2rem;
+    border-radius: 1rem;
+    background-color: #ffe5d9;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1.2rem;
+    transition: width 0.6s ease;
+  }
+
+  /* Modal Design */
+  .modal-content {
+    background: var(--fondo);
+    border-radius: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .modal-header {
+    background-color: #fbd3a6;
+    border-bottom: 1px solid #f7c59f;
+    color: var(--texto);
+  }
+
+  .modal-footer {
+    border-top: 1px solid #f7c59f;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    color: var(--encabezado);
+    margin-top: 1rem;
+  }
+
+  .alert-info {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #555;
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+
+  .table-bordered td, .table-bordered th {
+    border-color: #f0d9c4;
+  }
+
+  .table-group-divider > tr {
+    border-top: 1px solid #f1e0d3;
+  }
+</style>
+
+
+{% if orders %}
+<table class="table table-striped text-center table-bordered my-4">
+  <thead>
+    <tr>
+      <th scope="col">ID del pedido</th>
+      <th scope="col">Fecha del pedido</th>
+      <th scope="col">Importe pagado</th>
+      <th scope="col">Forma de pago</th>
+      <th scope="col">Estado del pedido</th>
+      <th scope="col">Detalles del Pedido</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for order in orders %}
+    <tr>
+      <th scope="row">#{{order.id}}</th>
+      <td>{{order.order_datetime}}</td>
+      <td>{{order.total_amount}}</td>
+      <td>{{order.payment_mode}}</td>
+      <td>
+        {{order.status}}
+        <div class="progress mt-1">
+          {% if order.status == "Pending" %}
+            <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" style="width: 100%">Pendiente</div>
+          {% elif order.status == "Accepted" %}
+            <div class="progress-bar bg-info progress-bar-striped" style="width: 25%">Aceptado</div>
+          {% elif order.status == "Cooking" %}
+            <div class="progress-bar bg-primary progress-bar-striped" style="width: 50%">Cocinando</div>
+          {% elif order.status == "Packed" %}
+            <div class="progress-bar bg-warning progress-bar-striped" style="width: 75%">Empacado</div>
+          {% elif order.status == "Completed" %}
+            <div class="progress-bar bg-success" style="width: 100%">Completado</div>
+          {% endif %}
+        </div>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#orderNumber{{order.id}}">
+          View details
+        </button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% for order in orders %}
+<div class="modal fade" id="orderNumber{{order.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles del pedido para el ID del pedido: #{{order.id}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Fecha de pedido:</strong> {{order.order_datetime}}</p>
+        <p><strong>Importe pagado:</strong> {{order.total_amount}}</p>
+        <p><strong>ID de la transacción:</strong> {{order.transaction_id}}</p>
+        <p><strong>Modo de pago:</strong> {{order.payment_mode}}</p>
+        <p><strong>Pasarela de pago:</strong> {{order.payment_gateway}}</p>
+        <p><strong>Estado del pedido:</strong> {{order.status}}</p>
+        <hr>
+        <h4>Su pedido</h4>
+        <table class="table table-striped text-center table-bordered mt-3">
+          <thead>
+            <tr>
+              <th scope="col">Comida</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Importe</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {% for item in order_items %}
+              {% if item.order.id == order.id %}
+              <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.item_total}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% else %}
+  <h1 class="alert alert-info text-center mt-5">Aún no has realizado ningún pedido</h1>
+{% endif %}
+{% endblock maincontent %}
