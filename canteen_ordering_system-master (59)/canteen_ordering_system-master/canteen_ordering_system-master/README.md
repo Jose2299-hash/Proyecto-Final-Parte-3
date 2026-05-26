@@ -1,9 +1,4 @@
 # Canteen Ordering System Built Using Django with Payment Integration of Paypal.
-
-![Made with love in India](https://madewithlove.now.sh/in?heart=true&colorA=%232543d4&colorB=%23f58f00&template=for-the-badge)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
 ## About Project 📄
 This Canteen Ordering System is Built Using Django, where students can order the food from their college canteen.
 
