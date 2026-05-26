@@ -1,37 +1,37 @@
-# Canteen Ordering System Built Using Django with Payment Integration of Paypal.
-## About Project 📄
-This Canteen Ordering System is Built Using Django, where students can order the food from their college canteen.
+# Sistema de pedidos de comedor universitario desarrollado con Django e integración de pagos con PayPal.
+Acerca del proyecto 📄
+Este sistema de pedidos de comedor universitario está desarrollado con Django y permite a los estudiantes pedir comida del comedor de su universidad.
 
-## Project Functionalities ⚙
-  - `Login/Register` to Your Account.
-  - Django `Built-in Authentication`.
-  - View the List of Available food that you can order.
-  - `Add-to-Cart Button` on Each food Item.
-  - `Increase/Decrease Quantity of Food` added into cart.
-  - Show `No. of Items in Cart at NavBar` of Application.
-  - View List of Added Items in Cart Page.
-  - Can `Increase/Decrease/Delete Item` from Cart Page.
-  - `Place Order` By selecting Payment Mode(Online/Cash).
-  - Payment `Integration of Paypal`.
-  - `View List of All Placed Orders` at Orders Page.
-  - View `Current Status of Order`.
-  - Check `Details of Each Order by clicking View Details Button`.
+## Funcionalidades del proyecto ⚙
+- Iniciar sesión/Registrarse en tu cuenta.
+- Autenticación integrada de Django.
+- Ver la lista de alimentos disponibles.
+- Botón "Añadir al carrito" para cada producto.
+- Aumentar/Disminuir la cantidad de alimentos en el carrito.
+- Mostrar el número de artículos en el carrito en la barra de navegación.
+- Ver la lista de artículos añadidos en la página del carrito.
+- Añadir/Disminuir/Eliminar artículos del carrito.
+- Realizar pedidos seleccionando el método de pago (en línea/efectivo).
+- Integración de pagos con PayPal.
+- Ver la lista de todos los pedidos realizados en la página de pedidos.
+- Ver el estado actual del pedido.
+- Consultar los detalles de cada pedido haciendo clic en el botón "Ver detalles".
 
-## Technologies Used 👨‍💻
-- `Django` - For Coding Backend of Application.
-- `SQLite` - Used this Default DataBase for Storing Data.
-- `DTL` - Django Template Language for Building Dynamic Pages.
-- `JavaScript` - For Integrating Additional functionalities in Project.
-- `Bootstrap 5` - For UI Development of Project.
-- `HTML/CSS` - For Coding Basic Templates of Project.
+## Tecnologías utilizadas 👨‍💻
+- `Django`: Para el desarrollo del backend de la aplicación.
+- `SQLite`: Se utiliza esta base de datos predeterminada para el almacenamiento de datos.
+- `DTL`: Lenguaje de plantillas de Django para la creación de páginas dinámicas.
+- `JavaScript`: Para la integración de funcionalidades adicionales en el proyecto.
+- `Bootstrap 5`: Para el desarrollo de la interfaz de usuario del proyecto.
+- `HTML/CSS`: Para la creación de las plantillas básicas del proyecto.
 
-## User-End Interface
-End User or Consumer Can Interact with the Application Using the web interface or the frontend of the application. 
+## Interfaz de usuario
+El usuario final o consumidor puede interactuar con la aplicación mediante la interfaz web o el frontend.
 
-## Business-End Interface
-Business-End means the Canteen Owner. As of now there is no separate application for Canteen Owner.
+## Interfaz de usuario
+La interfaz de usuario se refiere al propietario del comedor. Actualmente no existe una aplicación independiente para los propietarios de comedores.
 
-So Canteen Owners are provided with the Default `Admin Panel that is Provided by Django`.
+Por lo tanto, los propietarios de comedores disponen del panel de administración predeterminado proporcionado por Django.
 
 ### Here Are Some ScreenShots of The Application
 
@@ -50,18 +50,18 @@ So Canteen Owners are provided with the Default `Admin Panel that is Provided by
 <img src="https://user-images.githubusercontent.com/62383314/210779276-65054df6-b283-497a-aea2-cf7cb6c939fe.png" alt="drawing" width="49%"></img>
 
 ## Note
-If You are Learner, or Want to test this application. Then After Forking & Cloning, You Can use these `Test Credentials` for Logging-In into the Application.
+Si eres estudiante o quieres probar esta aplicación, después de clonarla y bifurcarla, puedes usar estas credenciales de prueba para iniciar sesión.
 
 ``` PYTHON
-- #### FOR USER:
+- #### PARA EL USUARIO:
   - ID : test
-  - PASSWORD : test
+  - CONTRASEÑA : test
 
-- #### FOR ADMIN:
+- #### PARA ADMINISTRADOR:
   - ID : admin
-  - PASSWORD : admin
+  - CONTRASEÑA : admin
 
-- #### FOR PAYMENT:
+- #### PARA EL PAGO:
   - ID : payment@admin.com
-  - PASSWORD : payment@admin.com
+  - CONTRASEÑA : payment@admin.com
 ```
